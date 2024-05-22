@@ -18,27 +18,33 @@ import kotlin.sequences.*
 import kotlin.text.*
 
 /*
- * Complete the 'miniMaxSum' function below.
+ * Complete the 'timeConversion' function below.
  *
- * The function accepts INTEGER_ARRAY arr as parameter.
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
  */
 
-fun miniMaxSum(arr: Array<Int>): Unit {
+fun timeConversion(s: String = "07:05:45PM"): String {
     // Write your code here
-    val max = arr.max().toLong()
-    val min = arr.min().toLong()
-    var sum : Long  = 0
-    for (i in arr) {
-        sum += i.toLong()
+
+    if (s.endsWith("PM")) {
+        if (s.substring(0,2).toInt()==12) return s.substring(0,8)
+        else return "${s.substring(0, 2).toInt()+12}${s.substring(2,8)}"
+    }else {
+        if (s.substring(0,2).toInt()==12) return "00${s.substring(2,8)}"
+        else return s.substring(0,8)
     }
 
-    println("${sum-max} ${sum-min}")
+
+
+
 
 }
 
 fun main(args: Array<String>) {
+    val s = readLine()!!
 
-    val arr = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+    val result = timeConversion(s)
 
-    miniMaxSum(arr)
+    println(result)
 }
