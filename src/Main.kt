@@ -17,34 +17,31 @@ import kotlin.ranges.*
 import kotlin.sequences.*
 import kotlin.text.*
 
+
+
 /*
- * Complete the 'timeConversion' function below.
+ * Complete the 'findMedian' function below.
  *
- * The function is expected to return a STRING.
- * The function accepts STRING s as parameter.
+ * The function is expected to return an INTEGER.
+ * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-fun timeConversion(s: String = "07:05:45PM"): String {
+fun findMedian(arr: Array<Int> ): Int {
     // Write your code here
 
-    if (s.endsWith("PM")) {
-        if (s.substring(0,2).toInt()==12) return s.substring(0,8)
-        else return "${s.substring(0, 2).toInt()+12}${s.substring(2,8)}"
-    }else {
-        if (s.substring(0,2).toInt()==12) return "00${s.substring(2,8)}"
-        else return s.substring(0,8)
-    }
+    arr.sort()
 
+    val centerOfArray = arr.size / 2
 
-
-
-
+    return arr[centerOfArray]
 }
 
 fun main(args: Array<String>) {
-    val s = readLine()!!
+    val n = readLine()!!.trim().toInt()
 
-    val result = timeConversion(s)
+    val arr = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+
+    val result = findMedian(arr)
 
     println(result)
 }
