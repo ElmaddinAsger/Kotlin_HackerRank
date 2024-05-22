@@ -18,31 +18,27 @@ import kotlin.sequences.*
 import kotlin.text.*
 
 /*
- * Complete the 'plusMinus' function below.
+ * Complete the 'miniMaxSum' function below.
  *
  * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-fun plusMinus(arr: Array<Int>): Unit {
+fun miniMaxSum(arr: Array<Int>): Unit {
     // Write your code here
-    var plus = 0
-    var minus = 0
-    var zero = 0
+    val max = arr.max().toLong()
+    val min = arr.min().toLong()
+    var sum : Long  = 0
     for (i in arr) {
-        if (i > 0) plus++
-        else if (i < 0) minus++
-        else zero++
+        sum += i.toLong()
     }
-    println(plus/arr.size.toFloat())
-    println(minus/arr.size.toFloat())
-    println(zero/arr.size.toFloat())
+
+    println("${sum-max} ${sum-min}")
 
 }
 
 fun main(args: Array<String>) {
-    val n = readLine()!!.trim().toInt()
 
     val arr = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
 
-    plusMinus(arr)
+    miniMaxSum(arr)
 }
