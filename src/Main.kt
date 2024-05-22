@@ -1,4 +1,3 @@
-
 import java.io.*
 import java.math.*
 import java.security.*
@@ -14,54 +13,49 @@ import kotlin.io.*
 import kotlin.jvm.*
 import kotlin.jvm.functions.*
 import kotlin.jvm.internal.*
+import kotlin.math.abs
 import kotlin.ranges.*
 import kotlin.sequences.*
 import kotlin.text.*
 
 /*
- * Complete the 'lonelyinteger' function below.
+ * Complete the 'diagonalDifference' function below.
  *
  * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY a as parameter.
+ * The function accepts 2D_INTEGER_ARRAY arr as parameter.
  */
 
-fun lonelyinteger(a: Array<Int>): Int {
+fun diagonalDifference(arr: Array<Array<Int>>): Int {
     // Write your code here
 
-    var uniqueItem = 0
+    var difference = 0
 
-    for (firstItem in a.indices) {
+    var sumLeftToRight = 0
+    var sumRightToLeft = 0
 
-        var controller = true
+    for ( position in arr.indices) {
 
-        for (secondItem in a.indices) {
+        val rowArray = arr[position]
+        sumLeftToRight += rowArray[position]
+        sumRightToLeft += rowArray[arr.size - ( position+1 )]
 
-            if (firstItem != secondItem) {
-
-                if (a[firstItem] == a[secondItem]) {
-
-                    controller = false
-                    break
-                }
-            }
-
-        }
-
-        if (controller) {
-
-            uniqueItem = a[firstItem]
-            break
-        }
     }
-    return uniqueItem
+
+    difference = sumLeftToRight - sumRightToLeft
+
+    return abs(difference)
 }
 
 fun main(args: Array<String>) {
     val n = readLine()!!.trim().toInt()
 
-    val a = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+    val arr = Array<Array<Int>>(n, { Array<Int>(n, { 0 }) })
 
-    val result = lonelyinteger(a)
+    for (i in 0 until n) {
+        arr[i] = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+    }
+
+    val result = diagonalDifference(arr)
 
     println(result)
 }
