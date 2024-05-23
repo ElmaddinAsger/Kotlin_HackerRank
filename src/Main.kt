@@ -13,49 +13,30 @@ import kotlin.io.*
 import kotlin.jvm.*
 import kotlin.jvm.functions.*
 import kotlin.jvm.internal.*
-import kotlin.math.abs
 import kotlin.ranges.*
 import kotlin.sequences.*
 import kotlin.text.*
 
 /*
- * Complete the 'diagonalDifference' function below.
+ * Complete the 'countingSort' function below.
  *
- * The function is expected to return an INTEGER.
- * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts INTEGER_ARRAY arr as parameter.
  */
 
-fun diagonalDifference(arr: Array<Array<Int>>): Int {
+fun countingSort(arr: Array<Int>): Array<Int> {
     // Write your code here
-
-    var difference = 0
-
-    var sumLeftToRight = 0
-    var sumRightToLeft = 0
-
-    for ( position in arr.indices) {
-
-        val rowArray = arr[position]
-        sumLeftToRight += rowArray[position]
-        sumRightToLeft += rowArray[arr.size - ( position+1 )]
-
-    }
-
-    difference = sumLeftToRight - sumRightToLeft
-
-    return abs(difference)
+    val myArray = Array(100) {0}
+    arr.forEach {++myArray[it]}
+    return myArray
 }
 
 fun main(args: Array<String>) {
     val n = readLine()!!.trim().toInt()
 
-    val arr = Array<Array<Int>>(n, { Array<Int>(n, { 0 }) })
+    val arr = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
 
-    for (i in 0 until n) {
-        arr[i] = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
-    }
+    val result = countingSort(arr)
 
-    val result = diagonalDifference(arr)
-
-    println(result)
+    println(result.joinToString(" "))
 }
