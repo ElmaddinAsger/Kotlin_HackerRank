@@ -1,42 +1,37 @@
 import java.io.*
-import java.math.*
-import java.security.*
-import java.text.*
 import java.util.*
-import java.util.concurrent.*
-import java.util.function.*
-import java.util.regex.*
-import java.util.stream.*
-import kotlin.collections.*
-import kotlin.comparisons.*
-import kotlin.io.*
-import kotlin.jvm.*
-import kotlin.jvm.functions.*
-import kotlin.jvm.internal.*
-import kotlin.ranges.*
-import kotlin.sequences.*
-import kotlin.text.*
 
-/*
- * Complete the 'countingSort' function below.
- *
- * The function is expected to return an INTEGER_ARRAY.
- * The function accepts INTEGER_ARRAY arr as parameter.
- */
+fun main(args: Array<Int>) {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT. */
 
-fun countingSort(arr: Array<Int>): Array<Int> {
-    // Write your code here
-    val myArray = Array(100) {0}
-    arr.forEach {++myArray[it]}
-    return myArray
-}
+    for (i in args.indices){
+        for (n in i + 1..<args.size) {
+            if (args[i] > args[n]) {
+                val result = args[i]
+                args[i] = args[n]
+                args[n] = result
+            }
+        }
+    }
+    println(args.contentToString())
 
-fun main(args: Array<String>) {
-    val n = readLine()!!.trim().toInt()
+    for (i in (args.size)/2..<args.size-1){
+        if (i == (args.size)/2){
+            val result = args[i]
+            args[i] = args[args.size-1]
+            args[args.size-1] = result
+        } else {
+            for (n in i+1..<args.size-1){
+                if (args[i] < args[n]){
+                    val result = args[i]
+                    args[i] = args[n]
+                    args[n] = result
+                }
+            }
+        }
+    }
 
-    val arr = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
+    println(args.contentToString())
 
-    val result = countingSort(arr)
 
-    println(result.joinToString(" "))
 }
